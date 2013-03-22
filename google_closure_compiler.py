@@ -50,7 +50,7 @@ class GoogleClosureCompiler:
         
     def _read_files_from_dir(self, path):
         file_list = os.listdir(path)
-        self.files = [os.path.join(path, f) for f in file_list if f.split('.')[-1]]
+        self.files = [os.path.join(path, f) for f in file_list if f.split('.')[-1] == 'js']
         
     def _write_compiled_file(self, code):
         try:
