@@ -30,9 +30,7 @@ class GoogleClosureCompiler:
         try:
             with contextlib.closing(httplib.HTTPConnection('closure-compiler.appspot.com')) as conn:
                 conn.request('POST', '/compile', params, headers)
-                response = conn.getresponse()
-                compiled_code = response.read()
-                self._write_compiled_file(compiled_code)
+                self._write_compiled_file(conn.getresponse().read())
         except httplib.HTTPException, e:
             print str(e)
         
@@ -55,7 +53,7 @@ class GoogleClosureCompiler:
     def _write_compiled_file(self, code):
         try:
             f = open(self._output_file, 'w')
-            f.write(code)
+            f.write(code.replace('\n', ''))
             f.close()
             print "Successfully compiled to %s" % self._output_file
         except IOError, e:
