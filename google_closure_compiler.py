@@ -33,6 +33,12 @@ class GoogleClosureCompiler:
                 self._write_compiled_file(conn.getresponse().read())
         except httplib.HTTPException, e:
             print str(e)
+            
+    def add_file(self, path):
+        if (os.path.isfile(path)):
+            self.files.append(path)
+        else:
+            raise IOError(path + ': not file or directory, or could not be read')
         
     def _read_files(self):
         src = ''
