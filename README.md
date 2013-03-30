@@ -25,6 +25,8 @@ python google_closure_compiler.py <path_to_source> <output_file_name>
 #### Within python
 
 ```python
+import google_closure_compiler
+
 foo = GoogleClosureCompiler(path_to_source, output_file_name)
 foo.compile()
 ```
