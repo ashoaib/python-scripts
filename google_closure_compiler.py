@@ -5,17 +5,44 @@ import sys
 import contextlib
 
 class GoogleClosureCompiler:
+    """
+    Wrapper class for compiling JavaScript file(s) into a single minified file,
+    using Google's Closure Compiler API. It can read an individual file, be
+    passed a list of files, or read files from a directory. It writes to an
+    output file in the same directory as the source.
+    
+    Example usage:
+    
+    - Command-line
+    
+        The script can be called from the command line:
+        
+        python google_closure_compiler.py <path_to_source> <output_file_name>
+        
+        <path_to_source> can be a path to a file or a directory
+        
+        <output_file_name> is an optional argument - this is the name of the
+        output file to write the compiled JavaScript to. If not passed,
+        defaults to js-min.js
+        
+    - Within python
+    
+        foo = GoogleClosureCompiler(path_to_source, output_file_name)
+        foo.compile()
+    """
+    
     files = []
     
     def __init__(self, path, output=None):
-        self._output_file = os.path.join(path, 'js-min.js' if output is None else output)
-        
         if (os.path.isdir(path)):
             self._read_files_from_dir(path)
         elif (os.path.isfile(path)):
             self.files.append(path)
+            path = os.path.split(path)[0]
         else:
             raise IOError(path + ': not file or directory, or could not be read')
+        
+        self._output_file = os.path.join(path, 'js-min.js' if output is None else output)
         
     def compile(self):
         src = self._read_files()
@@ -41,16 +68,16 @@ class GoogleClosureCompiler:
             raise IOError(path + ': not file or directory, or could not be read')
         
     def _read_files(self):
-        src = ''
+        src_list = []
         
         for _file in self.files:
             try:
                 with open(_file) as f:
-                    src += f.read()
+                    src_list.append(f.read())
             except IOError:
                 continue
                 
-        return src
+        return ''.join(src_list)
         
     def _read_files_from_dir(self, path):
         file_list = os.listdir(path)
