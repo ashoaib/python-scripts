@@ -30,3 +30,7 @@ import google_closure_compiler
 foo = google_closure_compiler.GoogleClosureCompiler(path_to_source, output_file_name)
 foo.compile()
 ```
+
+## txt2dat.py
+
+This is a simple script for converting an IP filter text (.txt or P2P format) file to a more recognisable .dat file. Typically used to generate IP filter list for uTorrent or Vuze.
