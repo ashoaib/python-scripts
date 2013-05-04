@@ -34,3 +34,17 @@ foo.compile()
 ## txt2dat.py
 
 This is a simple script for converting an IP filter text (.txt or P2P format) file to a more recognisable .dat file. Typically used to generate IP filter list for uTorrent or Vuze.
+
+## site_monitor.py (in progress)
+
+Another simple script for monitoring the HTTP status code returned by a website or URL.
+
+The default behaviour of the script when run via command-line is to check if the site is up or not, i.e. status code 200. If not up, it can send an email, or whatever your imagination can come up with :). At the moment, it just prints the status code (in progress).
+
+### Example usage
+
+```
+python site_monitor.py google.com
+```
+
+If a URL schema is not provided, the script defaults to `http://`.

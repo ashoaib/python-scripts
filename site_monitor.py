@@ -47,5 +47,4 @@ if __name__ == '__main__':
     sm.set_url(url)
     sm.make_request()
 
-    if sm.status_code != 200:
-        sm.notify()
+    print sm.status_code
