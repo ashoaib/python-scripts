@@ -17,12 +17,16 @@ class SiteMonitor:
             self.set_url(url)
 
     def set_url(self, url):
+        """Checks if a URL schema is set. If not, defaults to http://"""
+
         if len(url.split(':')) < 2:
             url = 'http://' + url
 
         self.url = url
 
     def make_request(self):
+        """Calls the requests.get method if a url is set"""
+
         if self.url is not None:
             self.request = requests.get(self.url)
         else:
@@ -32,6 +36,9 @@ class SiteMonitor:
     def status_code(self):
         return self.request.status_code
 
+    def notify(self):
+        pass
+
 
 if __name__ == '__main__':
     url = sys.argv[1]
@@ -40,4 +47,5 @@ if __name__ == '__main__':
     sm.set_url(url)
     sm.make_request()
 
-    print sm.status_code
+    if sm.status_code != 200:
+        sm.notify()
