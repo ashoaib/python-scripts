@@ -48,3 +48,9 @@ python site_monitor.py google.com
 ```
 
 If a URL schema is not provided, the script defaults to `http://`.
+
+#### Dependencies
+
+```
+requests
+```
