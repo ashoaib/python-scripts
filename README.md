@@ -52,5 +52,5 @@ If a URL schema is not provided, the script defaults to `http://`.
 ### Dependencies
 
 ```
-requests
+requests==1.2.0
 ```
